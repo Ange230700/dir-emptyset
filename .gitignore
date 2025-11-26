@@ -3,9 +3,10 @@
 .vscode/
 node_modules/
 dist/
+build/
+coverage/
 .env
 .DS_Store
 .idea/
 *.log
-coverage/
-*.tsbuildinfo
+pnpm-lock.yaml
