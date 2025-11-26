@@ -5,6 +5,7 @@
   "description": "DIR∅ – TDD microservices directory mini-project",
   "license": "MIT",
   "packageManager": "pnpm@10.23.0",
+  "type": "module",
   "scripts": {
     "dev": "echo \"Use per-app dev scripts in apps/ and services/\"",
     "build": "echo \"Use per-app build scripts in apps/ and services/\"",
@@ -16,9 +17,9 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "prepare": "husky",
     "commit": "cz",
-    "check-branch-name": "validate-branch-name",
+    "check-branch-name": "node scripts/check-branch-name.cjs",
     "check-all": "pnpm lint && pnpm typecheck && pnpm format:check && pnpm check-branch-name",
-    "save-changes": "pnpm check-all && git add . && pnpm commit && git pull origin HEAD && git push origin HEAD"
+    "save-changes": "pnpm format && pnpm check-all && git add . && pnpm commit && git pull origin HEAD && git push origin HEAD"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.0.0",
