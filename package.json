@@ -18,7 +18,7 @@
     "commit": "cz",
     "check-branch-name": "validate-branch-name",
     "check-all": "pnpm lint && pnpm typecheck && pnpm format:check && pnpm check-branch-name",
-    "save-changes": "pnpm check-all && git add . && pnpm commit && git pull origin HEAD --rebase && git push origin HEAD"
+    "save-changes": "pnpm check-all && git add . && pnpm commit && git pull origin HEAD && git push origin HEAD"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.0.0",
