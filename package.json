@@ -9,7 +9,9 @@
   "scripts": {
     "dev": "echo \"Use per-app dev scripts in apps/ and services/\"",
     "build": "echo \"Use per-app build scripts in apps/ and services/\"",
-    "test": "echo \"No test specified yet\"",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "format": "prettier --write .",
