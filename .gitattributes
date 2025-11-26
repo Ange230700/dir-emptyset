@@ -1,0 +1,19 @@
+# .gitattributes
+
+# Normalize text files to LF on all platforms
+* text=auto eol=lf
+
+# Binary assets
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.woff binary
+*.woff2 binary
+
+# Lock files / generated files
+package-lock.json -diff
+pnpm-lock.yaml -diff
+yarn.lock -diff

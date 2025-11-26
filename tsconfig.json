@@ -3,5 +3,5 @@
 {
   "extends": "./tsconfig.base.json",
   "include": ["apps", "services", "packages"],
-  "exclude": ["node_modules", "dist", "build"]
+  "exclude": ["node_modules", "dist", "build", "coverage", ".vscode"]
 }

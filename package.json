@@ -8,12 +8,17 @@
   "scripts": {
     "dev": "echo \"Use per-app dev scripts in apps/ and services/\"",
     "build": "echo \"Use per-app build scripts in apps/ and services/\"",
-    "test": "pnpm -r test",
-    "lint": "pnpm -r lint",
-    "format": "pnpm -r format",
-    "typecheck": "pnpm -r typecheck",
-    "prepare": "husky install",
-    "commit": "cz"
+    "test": "echo \"No test specified yet\"",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "prepare": "husky",
+    "commit": "cz",
+    "check-branch-name": "validate-branch-name",
+    "check-all": "pnpm lint && pnpm typecheck && pnpm format:check && pnpm check-branch-name",
+    "save-changes": "pnpm check-all && git add . && pnpm commit && git pull origin HEAD --rebase && git push origin HEAD"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.0.0",
@@ -26,7 +31,7 @@
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.0.0",
-    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.29.0",
     "globals": "^16.5.0",
     "husky": "^9.0.0",
@@ -43,5 +48,18 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "lint-staged": {
+    "*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,jsonc,md,yml,yaml}": [
+      "prettier --write"
+    ]
+  },
+  "validate-branch-name": {
+    "pattern": "^(dev|main){1}$|^(feat|fix|chore|docs|ci|refactor|test)/[a-z0-9._-]+$",
+    "errorMsg": "Invalid branch name. Use: dev, main, or feat/my-feature, fix/bug-123, chore/tooling-setup, etc."
   }
 }

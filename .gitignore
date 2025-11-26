@@ -1,12 +1,12 @@
 # .gitignore
 
-.vscode/
 node_modules/
 dist/
 build/
 coverage/
+.vscode/
+pnpm-lock.yaml
 .env
 .DS_Store
 .idea/
 *.log
-pnpm-lock.yaml
