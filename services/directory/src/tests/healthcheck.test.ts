@@ -1,4 +1,4 @@
-// services\src\healthcheck.test.ts
+// services\directory\test\healthcheck.test.ts
 
 import { describe, it, expect } from 'vitest';
 
