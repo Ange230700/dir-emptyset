@@ -1,10 +1,14 @@
-// services\directory\src\http\app.ts
+// services/directory/src/http/app.ts
 
 import express, { type Request, type Response, type NextFunction } from 'express';
 
 import { PrismaDirectoryRepository } from '../infrastructure/repositories/PrismaDirectoryRepository.js';
 import { CreateDirectoryEntry } from '../application/use-cases/CreateDirectoryEntry.js';
 import { SearchDirectoryEntries } from '../application/use-cases/SearchDirectoryEntries.js';
+import {
+  createDirectoryEntryBodySchema,
+  searchDirectoryEntriesQuerySchema,
+} from './validation/directorySchemas.js';
 
 const repo = new PrismaDirectoryRepository();
 const createDirectoryEntry = new CreateDirectoryEntry(repo);
@@ -22,25 +26,20 @@ export function createApp() {
 
   app.post('/entries', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const { name, email, tags } = req.body ?? {};
+      const parseResult = createDirectoryEntryBodySchema.safeParse(req.body);
 
-      if (!name || !email || !Array.isArray(tags)) {
+      if (!parseResult.success) {
         res.status(400).json({
-          message: 'Invalid payload. Expected { name: string, email: string, tags: string[] }',
+          message: 'Validation error',
+          issues: parseResult.error.issues, // 👈 ZodIssue[]
         });
         return;
       }
 
-      const entry = await createDirectoryEntry.execute({
-        name: String(name),
-        email: String(email),
-        tags: tags.map(String),
-      });
+      const entry = await createDirectoryEntry.execute(parseResult.data);
 
       res.status(201).json(entry);
-      return;
     } catch (err) {
-      // You can branch on known domain errors later (e.g., duplicate email)
       next(err);
     }
   });
@@ -49,23 +48,20 @@ export function createApp() {
     '/entries/search',
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
       try {
-        const rawQ = req.query.q;
+        const parseResult = searchDirectoryEntriesQuerySchema.safeParse(req.query);
 
-        // Only accept plain string `q`, reject arrays/objects
-        if (typeof rawQ !== 'string') {
-          res.status(400).json({ message: 'Query parameter "q" must be a string' });
+        if (!parseResult.success) {
+          res.status(400).json({
+            message: 'Validation error',
+            issues: parseResult.error.issues, // 👈 same here
+          });
           return;
         }
 
-        const q = rawQ.trim();
-        if (!q) {
-          res.status(400).json({ message: 'Missing query parameter "q"' });
-          return;
-        }
+        const { q } = parseResult.data;
 
         const results = await searchDirectoryEntries.execute({ query: q });
         res.status(200).json(results);
-        return;
       } catch (err) {
         next(err);
       }
@@ -73,7 +69,6 @@ export function createApp() {
   );
 
   // Basic error handler
-  // (you can replace with nicer problem-details JSON later)
   app.use(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     (err: unknown, _req: Request, res: Response, _next: NextFunction) => {

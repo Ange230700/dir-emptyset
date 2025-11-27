@@ -71,4 +71,20 @@ describe('Directory HTTP API', () => {
     expect(byTag.body).toHaveLength(1);
     expect(byTag.body[0].name).toBe('John Smith');
   });
+
+  it('rejects invalid body for POST /entries', async () => {
+    const res = await request(app)
+      .post('/entries')
+      .send({ name: '', email: 'not-an-email', tags: [] }) // all invalid
+      .expect(400);
+
+    expect(res.body.message).toBe('Validation error');
+    expect(res.body.issues).toBeDefined();
+  });
+
+  it('rejects missing q on GET /entries/search', async () => {
+    const res = await request(app).get('/entries/search').expect(400);
+
+    expect(res.body.message).toBe('Validation error');
+  });
 });

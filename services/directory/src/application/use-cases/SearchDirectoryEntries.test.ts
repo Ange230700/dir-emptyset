@@ -6,7 +6,7 @@ import { CreateDirectoryEntry } from './CreateDirectoryEntry.js';
 import { SearchDirectoryEntries } from './SearchDirectoryEntries.js';
 
 class InMemoryDirectoryRepository implements DirectoryRepository {
-  private entries: DirectoryEntry[] = [];
+  private readonly entries: DirectoryEntry[] = [];
 
   async create(entry: Omit<DirectoryEntry, 'id'>): Promise<DirectoryEntry> {
     const created: DirectoryEntry = {

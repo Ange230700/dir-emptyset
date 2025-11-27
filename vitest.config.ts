@@ -1,13 +1,18 @@
 // vitest.config.ts
 
-import { defineConfig } from 'vitest/config';
+import { defineConfig, configDefaults } from 'vitest/config';
 
 export default defineConfig({
   test: {
     environment: 'node',
     globals: true,
+
+    // Look for tests in the current project tree (works from root or a package)
     include: ['**/*.test.ts', '**/*.spec.ts'],
-    exclude: ['node_modules', 'dist', 'build'],
+
+    // Use Vitest defaults (which already exclude node_modules, etc.)
+    // then add your own folders.
+    exclude: [...configDefaults.exclude, 'dist', 'build', 'coverage'],
 
     env: {
       DATABASE_URL:
