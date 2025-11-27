@@ -5,3 +5,7 @@ dist
 build
 coverage
 .vscode
+
+# Ignore Prisma-generated client code
+services/directory/generated
+services/directory/prisma/migrations
