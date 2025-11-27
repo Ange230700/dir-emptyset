@@ -1,0 +1,17 @@
+// services/directory/prisma/schema.prisma
+
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client"  // Prisma 7
+  output   = "../generated/client"
+}
+
+model DirectoryEntry {
+  id    String   @id @default(cuid())
+  name  String
+  email String   @unique
+  tags  String[]
+}

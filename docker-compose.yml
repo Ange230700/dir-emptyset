@@ -1,0 +1,17 @@
+# docker-compose.yml
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: dir_directory_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: dir_directory
+    ports:
+      - '5432:5432'
+    volumes:
+      - dir_pg_data:/var/lib/postgresql/data
+
+volumes:
+  dir_pg_data:
