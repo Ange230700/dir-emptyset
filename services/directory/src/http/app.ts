@@ -2,13 +2,13 @@
 
 import express, { type Request, type Response, type NextFunction } from 'express';
 
-import { PrismaDirectoryRepository } from '../infrastructure/repositories/PrismaDirectoryRepository.js';
-import { CreateDirectoryEntry } from '../application/use-cases/CreateDirectoryEntry.js';
-import { SearchDirectoryEntries } from '../application/use-cases/SearchDirectoryEntries.js';
+import { PrismaDirectoryRepository } from '@services/directory/src/infrastructure/repositories/PrismaDirectoryRepository.js';
+import { CreateDirectoryEntry } from '@services/directory/src/application/use-cases/CreateDirectoryEntry.js';
+import { SearchDirectoryEntries } from '@services/directory/src/application/use-cases/SearchDirectoryEntries.js';
 import {
   createDirectoryEntryBodySchema,
   searchDirectoryEntriesQuerySchema,
-} from './validation/directorySchemas.js';
+} from '@services/directory/src/http/validation/directorySchemas.js';
 
 const repo = new PrismaDirectoryRepository();
 const createDirectoryEntry = new CreateDirectoryEntry(repo);

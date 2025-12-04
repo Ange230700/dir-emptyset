@@ -1,17 +1,24 @@
 // vitest.config.ts
 
 import { defineConfig, configDefaults } from 'vitest/config';
+import { fileURLToPath } from 'node:url';
+import { resolve } from 'node:path';
+
+const rootDir = fileURLToPath(new URL('./', import.meta.url));
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      '@apps': resolve(rootDir, 'apps'),
+      '@services': resolve(rootDir, 'services'),
+      '@packages': resolve(rootDir, 'packages'),
+    },
+  },
   test: {
     environment: 'node',
     globals: true,
 
-    // Look for tests in the current project tree (works from root or a package)
     include: ['**/*.test.ts', '**/*.spec.ts'],
-
-    // Use Vitest defaults (which already exclude node_modules, etc.)
-    // then add your own folders.
     exclude: [...configDefaults.exclude, 'dist', 'build', 'coverage'],
 
     env: {

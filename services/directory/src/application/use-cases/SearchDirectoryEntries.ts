@@ -1,6 +1,10 @@
 // services/directory/src/application/use-cases/SearchDirectoryEntries.ts
-import type { DirectoryRepository } from '../../domain/repositories/DirectoryRepository.js';
-import type { DirectoryEntry } from '../../domain/entities/DirectoryEntry.js';
+
+// @ts-expect-error -- alias not resolved by TS but works via tooling
+import type { DirectoryRepository } from '@services/directory/domain/repositories/DirectoryRepository';
+
+// @ts-expect-error -- alias not resolved by TS but works via tooling
+import type { DirectoryEntry } from '@services/directory/domain/entities/DirectoryEntry';
 
 export interface SearchDirectoryEntriesInput {
   query: string;

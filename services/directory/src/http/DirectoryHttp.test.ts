@@ -3,8 +3,8 @@
 import { describe, it, beforeAll, afterAll, beforeEach, expect } from 'vitest';
 import request from 'supertest';
 
-import { app } from './app.js';
-import { prisma } from '../infrastructure/repositories/PrismaDirectoryRepository.js';
+import { app } from '@services/directory/src/http/app.js';
+import { prisma } from '@services/directory/src/infrastructure/repositories/PrismaDirectoryRepository.js';
 
 describe('Directory HTTP API', () => {
   beforeAll(async () => {

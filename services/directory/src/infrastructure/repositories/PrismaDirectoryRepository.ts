@@ -1,9 +1,8 @@
 // services/directory/src/infrastructure/repositories/PrismaDirectoryRepository.ts
-import { PrismaClient } from '../../../generated/client/client.js';
+import { PrismaClient } from '@services/directory/prisma/generated/client/client.js';
 import { PrismaPg } from '@prisma/adapter-pg';
-
-import type { DirectoryRepository } from '../../domain/repositories/DirectoryRepository.js';
-import type { DirectoryEntry as DomainDirectoryEntry } from '../../domain/entities/DirectoryEntry.js';
+import type { DirectoryRepository } from '@services/directory/src/domain/repositories/DirectoryRepository.js';
+import type { DirectoryEntry as DomainDirectoryEntry } from '@services/directory/src/domain/entities/DirectoryEntry.js';
 
 const connectionString = process.env.DATABASE_URL;
 

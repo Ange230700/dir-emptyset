@@ -1,9 +1,9 @@
 // services/directory/src/application/use-cases/SearchDirectoryEntries.test.ts
 import { describe, it, expect, beforeEach } from 'vitest';
-import type { DirectoryRepository } from '../../domain/repositories/DirectoryRepository.js';
-import type { DirectoryEntry } from '../../domain/entities/DirectoryEntry.js';
-import { CreateDirectoryEntry } from './CreateDirectoryEntry.js';
-import { SearchDirectoryEntries } from './SearchDirectoryEntries.js';
+import type { DirectoryRepository } from '@services/directory/src/domain/repositories/DirectoryRepository.js';
+import type { DirectoryEntry } from '@services/directory/src/domain/entities/DirectoryEntry.js';
+import { CreateDirectoryEntry } from '@services/directory/src/application/use-cases/CreateDirectoryEntry.js';
+import { SearchDirectoryEntries } from '@services/directory/src/application/use-cases/SearchDirectoryEntries.js';
 
 class InMemoryDirectoryRepository implements DirectoryRepository {
   private readonly entries: DirectoryEntry[] = [];

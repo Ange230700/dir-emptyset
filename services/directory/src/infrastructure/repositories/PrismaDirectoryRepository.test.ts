@@ -1,16 +1,9 @@
 // services/directory/src/infrastructure/repositories/PrismaDirectoryRepository.test.ts
 import { describe, it, expect, beforeAll, afterAll, beforeEach } from 'vitest';
-import { PrismaClient } from '../../../generated/client/client.js';
-import { Pool } from 'pg';
-import { PrismaPg } from '@prisma/adapter-pg';
-import { PrismaDirectoryRepository } from './PrismaDirectoryRepository.js';
-
-// Build the same adapter-based client Prisma 7 expects
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-});
-const adapter = new PrismaPg(pool);
-const prisma = new PrismaClient({ adapter });
+import {
+  prisma,
+  PrismaDirectoryRepository,
+} from '@services/directory/src/infrastructure/repositories/PrismaDirectoryRepository.js';
 
 describe('PrismaDirectoryRepository', () => {
   const repo = new PrismaDirectoryRepository();
@@ -27,7 +20,6 @@ describe('PrismaDirectoryRepository', () => {
 
   afterAll(async () => {
     await prisma.$disconnect();
-    await pool.end();
   });
 
   it('creates a directory entry with a generated id', async () => {

@@ -1,6 +1,7 @@
 // services/directory/src/application/use-cases/CreateDirectoryEntry.ts
-import type { DirectoryRepository } from '../../domain/repositories/DirectoryRepository.js';
-import type { DirectoryEntry } from '../../domain/entities/DirectoryEntry.js';
+
+import type { DirectoryRepository } from '@services/directory/src/domain/repositories/DirectoryRepository.js';
+import type { DirectoryEntry } from '@services/directory/src/domain/entities/DirectoryEntry.js';
 
 export interface CreateDirectoryEntryInput {
   name: string;

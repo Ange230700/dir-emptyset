@@ -1,5 +1,5 @@
 // services/directory/src/domain/repositories/DirectoryRepository.ts
-import type { DirectoryEntry } from '../entities/DirectoryEntry.js';
+import type { DirectoryEntry } from '@services/directory/src/domain/entities/DirectoryEntry.js';
 
 /**
  * Persistence boundary for directory entries.

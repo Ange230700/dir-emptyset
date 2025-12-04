@@ -19,9 +19,9 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@apps/*": ["apps/*/src"],
-      "@services/*": ["services/*/src"],
-      "@packages/*": ["packages/*/src"]
+      "@apps/*": ["apps/*"],
+      "@services/*": ["services/*"],
+      "@packages/*": ["packages/*"]
     }
   }
 }
