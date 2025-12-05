@@ -22,7 +22,11 @@
     "check-branch-name": "node scripts/check-branch-name.cjs",
     "prisma:generate:directory": "pnpm --filter @services/directory prisma:generate",
     "check-all": "pnpm prisma:generate:directory && pnpm lint && pnpm typecheck && pnpm format:check && pnpm check-branch-name",
-    "save-changes": "pnpm format && pnpm check-all && git add . && pnpm commit && git pull origin HEAD && git push origin HEAD"
+    "save-changes": "pnpm format && pnpm check-all && git add . && pnpm commit && git pull origin HEAD && git push origin HEAD",
+    "db:start": "node scripts/db/start.js",
+    "db:stop": "node scripts/db/stop.js",
+    "db:restart": "node scripts/db/restart.js",
+    "db:status": "node scripts/db/status.js"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.0.0",
